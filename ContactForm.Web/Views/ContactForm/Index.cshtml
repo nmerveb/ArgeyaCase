@@ -1,0 +1,20 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    <form asp-action="Create" method="post">
+        <input type="text" name="Name" placeholder="Name" required />
+        <input type="text" name="Surname" placeholder="Surname" required />
+        <input type="text" name="Phone" placeholder="Phone" required />
+        <input type="email" name="Email" placeholder="Email" required />
+        <select name="DepartmentId" required>
+            @foreach (var item in ViewBag.Departments as List<SelectListItem>)
+            {
+                <option value="@item.Value">@item.Text</option>
+            }
+        </select>
+        <textarea name="Message" placeholder="Message" required></textarea>
+        <button type="submit">Submit</button>
+    </form>
+
+}

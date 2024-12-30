@@ -1,7 +1,25 @@
+using ContactForm.Infrastructure.Data;
+using Microsoft.EntityFrameworkCore;
+using System.Reflection;
+using MediatR;
+using ContactForm.Application.Features.ContactForms;
+
+
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+
+builder.Services.AddMediatR(cfg =>
+{
+    cfg.RegisterServicesFromAssembly(Assembly.GetAssembly(typeof(GetDepartmentsQueryHandler)));
+});
+
+
 
 var app = builder.Build();
 
@@ -17,6 +35,13 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllerRoute(
+        name: "default",
+        pattern: "{controller=ContactForm}/{action=Index}/{id?}");
+});
 
 app.UseAuthorization();
 

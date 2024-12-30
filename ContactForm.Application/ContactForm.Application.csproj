@@ -6,4 +6,14 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="MediatR" Version="12.4.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ContactForm.Domain\ContactForm.Domain.csproj" />
+    <ProjectReference Include="..\ContactForm.Infrastructure\ContactForm.Infrastructure.csproj" />
+  </ItemGroup>
+
 </Project>
